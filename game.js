@@ -1,7 +1,7 @@
 // let base_url = 'http://localhost:8888/apisdecolgen/';
 
 // if (window.location.hostname == 'localhost') {
-    base_url = 'http://localhost:8888/gitlab/crozword/';
+    base_url = 'http://localhost:8888/crozword_backend/';
 // }else{
 //     base_url = 'https://apis.ompaseries.xyz/';    
 // }
@@ -102,8 +102,6 @@ function boardinffill(r){
 
         uname_active = 'dendy-001';
         openconfirmationbox();
-
-        
       })
     );
 
@@ -725,8 +723,7 @@ function gen_jwb(){
 btnmulai.addEventListener('click', startnewgame);
 
 function reguser_todb(){
-    //bouncinganimation(e.target);
-    submitdata();
+    gosubmit();
 }
 
 function refreshgame(e){
@@ -873,28 +870,6 @@ function opening(){
 
 function d(id) {
     return document.getElementById(id);
-}
-
-//Reg User on the game
-function submitdata() {
-    // var validations = true;
-
-    // if (uname.value == '' || uname.value.trim() == '') {
-    //     TweenLite.to(vname, 0.3, {
-    //         scale: 1.1,
-    //         ease: Back.easeOut
-    //     });
-    //     TweenLite.to(vname, 0.3, {
-    //         scale: 1,
-    //         ease: Sine.easeOut,
-    //         delay: .3
-    //     });
-    //     validations = false;
-    // }
-
-    // if (validations) {
-        gosubmit();
-    // }
 }
 
 function autosaved_tts(){
