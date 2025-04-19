@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Crossword Kompascom Apps</title>
+
+    <meta name="msapplication-TileColor" content="#FFF">
+    <meta name="theme-color" content="#FFF">
+
+</head>
+
+<body>
+    <!-- <div id="hrdy">code by Dhany Da Vinci</div> -->
+<script>
+    let board_set = [
+    [null,1,35,36,37,null,null,null,2,38,39,0,null,`~`,`~`],
+[40,null,3,0,0,null,null,null,4,0,0,null,41,`~`,`~`],
+[5,42,null,6,0,null,null,null,7,0,null,8,0,`~`,`~`],
+[9,0,43,0,0,44,null,10,0,0,45,0,0,`~`,`~`],
+[11,0,0,null,null,12,0,0,null,null,13,0,0,`~`,`~`],
+[14,0,0,null,null,0,null,0,null,null,15,0,0,`~`,`~`],
+[null,null,null,null,null,16,0,0,null,null,null,null,null,`~`,`~`],
+[17,0,0,0,0,0,null,18,0,0,0,0,0,`~`,`~`],
+[null,null,null,null,null,19,0,0,null,null,null,null,null,`~`,`~`],
+[20,46,47,null,null,0,null,0,null,null,21,48,49,`~`,`~`],
+[22,0,0,null,null,23,0,0,null,null,24,0,0,`~`,`~`],
+[25,0,0,50,51,0,null,26,52,53,0,0,0,`~`,`~`],
+[27,0,null,28,0,null,null,null,29,0,null,30,0,`~`,`~`],
+[0,null,31,0,0,null,null,null,32,0,54,null,0,`~`,`~`],
+[null,33,0,0,0,null,null,null,34,0,0,0,null,`~`,`~`],
+]
+
+let set_mendatar = [
+[1,'Negara di Amerika Selatan yang terkenal dengan Machu Picchu','Peru'],
+[2,'Ngobrol ringan, bisa antar teman atau di grup online','Chat'],
+[3,'Aturan yang harus disetujui sebelum pakai aplikasi atau layanan online','tos'],
+[4,'Puisi atau lagu yang ditulis untuk memuji sesuatu atau seseorang.','ode'],
+[5,'Singkatan dari Audio Visual.','AV'],
+[6,'Inisial resmi negara bagian tempat Hollywood berada','CA'],
+[7,'Singkatan dari Lumen','LM'],
+[8,'Perusahaan game besar pembuat The Sims dan FIFA','ea'],
+[9,'Data kecil yang disimpan website di browser kamu.','cookie'],
+[10,'Ketergantungan berlebihan pada sesuatu, seperti obat atau gawai.','adiksi'],
+[11,'Singkatan dari kata Latin yang berarti ‘dan lain-lain','etc'],
+[12,'Kata tanya atau ekspresi heran dalam Bahasa Indonesia','kok'],
+[13,'Salah satu penyedia layanan internet pertama yang terkenal di era 90-an','AOL'],
+[14,'Platform video tempat kamu bisa nonton orang pintar ngomong dalam 18 menit','TED'],
+[15,'Dua papan, satu lereng, banyak gaya — olahraga ini butuh keseimbangan','ski'],
+[16,'Tempat isi bensin di pinggir jalan','pom'],
+[17,'Barisan orang atau kendaraan yang berjalan untuk merayakan sesuatu.','Parade'],
+[18,'Hasil dari mengaplikasikan sesuatu ke permukaan, seperti mentega di roti','olesan'],
+[19,'(Direct Stream Digital) Format audio resolusi tinggi digunakan di SACD','dsd'],
+[20,'Singkatan untuk pemimpin tertinggi dalam perusahaan.','ceo'],
+[21,'Permen koleksi populer dari Eropa dengan wadah karakter kepala kartun','pez'],
+[22,'Kalau bukan Intel, ya ini... Jagoannya para gamer','amd'],
+[23,'Pesan pendek yang kamu kirim saat panik dan butuh pertolongan','sos'],
+[24,'Penyakit autoimun yang dikenal juga sebagai lupus','sle'],
+[25,'Sejati atau sesungguhnya; sering dipakai dalam konteks filsafat atau keimanan.','Hakiki'],
+[26,'Harapan atau cita-cita yang ingin diwujudkan','impian'],
+[27,'Singkatan ukuran pakaian anak-anak, youth small','ys'],
+[28,'metode pemurnian air: Reverse Osmosis.','ro'],
+[29,'Plat kendaraan dari Magelang, Purworejo, dan sekitarnya','aa'],
+[30,'Inisial penyanyi pop Indonesia, Krisdayanti','kd'],
+[31,'Kelompok orang yang bekerja sama untuk satu tujuan','tim'],
+[32,'Dulu dipakai buat legalitas bisnis, sekarang udah diganti sama NIB','tdp'],
+[33,'Kumpulan fakta atau informasi yang bisa dianalisis','data'],
+[34,'Penyakit yang menyerang sistem kekebalan tubuh, disebabkan oleh virus HIV','AIDS'],
+]
+
+let set_menurun = [
+[35,'Singkatan makhluk luar angkasa ikonik dari film fiksi ilmiah buatan Amerika tahun 1982.','ET'],
+[36,'Salah satu genre musik yang sangat populer dan keren','rock'],
+[37,'Judul lagu dari Tiara Andini yang menceritakan akhir dari sebuah hubungan','usai'],
+[2,'Lawan dari panas.','cold'],
+[39,'Kerjaan yang butuh jago ngomong, jago closing, dan tahan revisi dari klien.','ae'],
+[38,'Kabel standar untuk menghubungkan laptop ke layar atau proyektor.','hdmi'],
+[40,'Keadaan jalanan yang padat dan tidak bergerak.','macet'],
+[41,'Suku asli yang mendiami wilayah Sulawesi Tengah, khususnya Kota Palu.','kaili'],
+[42,'Aksi memilih dalam pemilu','vote'],
+[8,'Hari setelah hari ini','esok'],
+[43,'Gangguan mental yang ditandai dengan pikiran obsesif dan perilaku kompulsif','ocd'],
+[44,'Perjalanan atau pengiriman barang, atau misi penjelajahan','Ekspedisi'],
+[10,'Tempat tinggal sementara saat bepergian, seperti hotel atau penginapan','Akomodasi'],
+[45,'Uang tunai yang tersedia, biasanya dicatat dalam pembukuan','kas'],
+[20,'Sinonim dari "cahaya", sering dipakai dalam bentuk nama.','cahya'],
+[46,'Benda kecil tapi berharga besar, makin disimpan makin mahal','emas'],
+[47,'Singkatan dari platform open-source untuk pengumpulan data survei lapangan','odk'],
+[21,'Satuan tekanan udara yang sering dipakai untuk mengukur tekanan ban','psi'],
+[48,'Menghindar dari sesuatu','elak'],
+[49,'Ruang meditasi dalam tradisi Zen','zendo'],
+[50,'Hemat dalam memakai sesuatu, seperti uang atau listrik','irit'],
+[51,'Kondisi tidak sadar dalam waktu lama, biasanya akibat cedera serius.','koma'],
+[52,'Indra penglihatan pada tubuh manusia.','mata'],
+[53,'Tanaman penghasil beras, makanan pokok di Indonesia.','padi'],
+[31,'Tugas Akhir mahasiswa','ta'],
+[54,'Dua huruf yang menggambarkan orang yang nggak gugup ngomong di depan umum','pd'],
+]
+
+let newmendatar = extrak_set(set_mendatar);
+let newanw_hor = extrak_set_anw(set_mendatar); 
+
+let newmenurun = extrak_set(set_menurun);
+let newanw_ver = extrak_set_anw(set_menurun); 
+
+
+console.log(JSON.stringify(newmendatar));
+console.log(JSON.stringify(newanw_hor));
+
+console.log(JSON.stringify(newmenurun));
+console.log(JSON.stringify(newanw_ver));
+
+
+
+function extrak_set(r){
+    let tamp = [];
+    let temp_q = [];
+    let jj = '';
+    
+    for (let s=0; s < r.length; s++){
+        //Extrak for Quest
+        temp_q.push([r[s][0],r[s][1]]);
+
+        jj = '';
+        for (let d=0; d < r[s][2].length; d++) {
+            //Extrak for Anw
+            jj += "*"
+        }
+        //tamp += "[" + r[s][0] + ",'" + jj +  ",'" + jj + "'],";
+        tamp.push =([r[s][0], jj, jj])
+    }
+    //newanw_hor = tamp;
+    return temp_q;
+}
+
+function extrak_set_anw(r){
+    let tamp = [];
+    let jj = '';
+    
+    for (let s=0; s < r.length; s++){
+        jj = '';
+        for (let d=0; d < r[s][2].length; d++) {
+            //Extrak for Anw
+            jj += "*"
+        }
+        tamp.push([r[s][0], jj, jj])
+    }
+    return tamp;
+}
+
+
+ console.log(JSON.stringify(board_set));
+//console.log(JSON.stringify(mendatar_list));
+// console.log(JSON.stringify(menurun_list));
+
+//  console.log(JSON.stringify(jwb_hor));
+
+ 
+// console.log(JSON.stringify(jwb_ver));
+// console.log(JSON.stringify(gen_jwb(j_hor)));
+
+// gen_jwb(jwb_hor)
+function gen_jwb(r){
+    let tamp = '';
+    let jj = '';
+    
+    for (let s=0; s < r.length; s++){
+        jj = '';
+        for (let d=0; d < r[s][1].length; d++) {
+            jj += "*"
+        }
+        tamp += "[" + r[s][0] + ",'" + r[s][1] + "','" + jj + "'],";
+    }
+    return tamp;
+}
+
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+
+
+var foo = getParameterByName('v'); // "lorem"
+// console.log(foo);
+
+</script>
+</body>
+
+</html>
+
+

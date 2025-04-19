@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21x21 Board</title>
+    <style>
+        /* Container for the board */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(21, 17px); /* 21 columns of 17px each */
+            grid-template-rows: repeat(21, 17px); /* 21 rows of 17px each */
+            border: 1px solid black; /* Outer border of the grid */
+            width: fit-content;
+            margin: 20px auto;
+        }
+
+        /* Each cell in the grid */
+        .cell {
+            width: 17px;
+            height: 17px;
+            border: 1px solid black; /* Border for each cell */
+            box-sizing: border-box; /* Include border in width and height */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">21x21 Board</h1>
+    <div class="board">
+        <!-- Generate 21x21 cells -->
+        <!-- Each row contains 21 cells -->
+        <!-- A total of 441 cells -->
+        <script>
+            const board = document.querySelector('.board');
+            for (let i = 0; i < 21 * 21; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                board.appendChild(cell);
+            }
+        </script>
+    </div>
+</body>
+</html>
