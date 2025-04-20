@@ -6,8 +6,10 @@
 //     base_url = 'https://apis.ompaseries.xyz/';    
 // }
 
-let uname_active = ''
+let uname_active = 'dendy-001'
 let gameid_active = 1;
+let active_board_for_all = '';
+let premium_user = false;
 
 var boardcol = 0;
 var boardrow = 0;
@@ -65,32 +67,34 @@ function getParameterByName(name, url = window.location.href) {
 
 getboardinfo();
 function getboardinfo() {
-        var mydata = {
-            idgame: '',
-            actmonth: '04',
-        };
+    var mydata = {
+        idgame: '',
+        actmonth: '04',
+        uname: uname_active,
+    };
 
-        $.ajax({
-            url: base_url + "index.php/adv/boardinfo",
-            type: "POST",
-            data: mydata,
-            dataType: "JSON",
-            success: function(response) {
-                boardinffill(response);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert('Gagal menyimpan, refresh browser')
-            }
-        });  
+    $.ajax({
+        url: base_url + "index.php/adv/boardinfo",
+        type: "POST",
+        data: mydata,
+        dataType: "JSON",
+        success: function(response) {
+            boardinffill(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Gagal menyimpan, refresh browser')
+        }
+    });  
 }
 
 function boardinffill(r){
     let pastboard = false;
     let tempbrd = '';
+    infotts.innerHTML = '<h1 id="brdtittle">Minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
-        infotts.innerHTML += "<div class=cardboard id='card" +r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname'>Board " + r[i].idgame +  "</div><div class=brdinfo>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval></div></div><div class=prgtext>100%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
-        if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; }
+        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname'>Board " + r[i].idgame +  "</div><div class=brdinfo>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
+        if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; active_board_for_all = r[i].idgame }
     }
     
     //boardpic.src = 'https://ompaseries.xyz/boardtts/' + arrboardgame[arrboardgame_curr] + ".png";
@@ -100,14 +104,43 @@ function boardinffill(r){
         tempbrd = box.id;
         gameid_active = tempbrd.substr(4, tempbrd.length);
 
-        uname_active = 'dendy-001';
-        openconfirmationbox();
+        if ((gameid_active != active_board_for_all) && (!premium_user)) {
+            //console.log('user murahan');
+            showsubscribepopup();
+            
+        }else{
+            btnclick.currentTime = 0;
+            btnclick.play();
+            openconfirmationbox();
+        }
       })
     );
 
     boardpic.src = 'board/'  + arrboardgame[arrboardgame_curr] + ".png";
     gameid_active = arrboardgame[arrboardgame_curr];
 }
+
+TweenMax.to(modalnonprem, 0, {alpha: 0, scale:.7, y:10, ease: Expo.easeOut});
+function showsubscribepopup(){
+    nonpremium.currentTime = 0;
+    nonpremium.play();
+    nonprem.style.display = 'block';
+    TweenMax.to(modalnonprem, .3, {alpha: 1, scale:1, y:0, ease: Expo.easeOut});
+}
+
+conyesnonprem.addEventListener('click', ()=>{
+    TweenMax.to(modalnonprem, 0, {alpha: 0, scale:.7, y:10, ease: Expo.easeOut});
+    nonprem.style.display = 'none';
+    
+    window.open('https://plus.kompas.com/detail?source=crozword','blank');
+})
+
+btnpremclose.addEventListener('click', ()=>{
+    TweenMax.to(modalnonprem, 0, {alpha: 0, scale:.7, y:10, ease: Expo.easeOut});
+    nonprem.style.display = 'none';
+    btncancel.currentTime = 0;
+    btncancel.play();
+})
 
 function openconfirmationbox(){
 
@@ -126,6 +159,8 @@ conyes.addEventListener('click',()=>{
 conno.addEventListener('click', ()=>{
     confibox.style.display='none';
     TweenMax.to(modalconf, 0, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut});
+    btncancel.currentTime = 0;
+    btncancel.play();
 })
 
 // barr_right.addEventListener('click', navboardselect);
@@ -178,7 +213,9 @@ function fillgameboard(r){
     TweenMax.to(cover, 1, {alpha: 0, ease: Expo.easeOut, onComplete:()=>{
         cover.style.display = 'none';
     }});
+
 }
+
 
 function newgame() {
         var mydata = {
@@ -310,12 +347,13 @@ function optimize_finder(){
         //check horizontal 
         for (let h=0; h<mendatar_list.length; h++){
             temparr = mendatar_list[h][4];
+            //console.log('temparr : ' + temparr);
+
             for (let j=0; j<temparr.length; j++) {
                 if (temparr[j] == ('anw_' + hortiles[1] + '_' + hortiles[2])) {
                     //ID Pertanyaan
                     board_map[i][3] = h;
                     board_map[i][4] = j;
-
                 }
             }
         }
@@ -357,8 +395,7 @@ function cursorposition(boxclicked = ''){
     getindexq = findValue((questorient == 'hor' ? mendatar_list : menurun_list), findedrootbox);
     active_jwb = [];
 
-    if (questorient == 'hor') {
-        
+    if (questorient == 'hor') {        
         //Horizontal Cursor
         currpost = parseInt(strarr[2]) + parseInt(activeansarr[getindexq][2].length-1)
         
@@ -528,7 +565,7 @@ function magnifyclick(e){
     highlight_boxes(questorient, findValue((questorient == 'hor' ? mendatar_list : menurun_list), findedrootbox), true, true);
     cursorposition(cursorbox);
     
-    console.log('after  : ' + cursorbox);
+    // console.log('after  : ' + cursorbox);
     // console.log("tiles_" + strarr[1] + "_" + strarr[2]);
     // document.getElementById("tiles_" + strarr[1] + "_" + strarr[2]).style.backgroundColor = "#D9EAFD";
 }
@@ -571,12 +608,12 @@ function updateboard(){
         start_x = menurun_list[quest_index][2];
         start_y = menurun_list[quest_index][3];
         tmpstr = String(jwb_ver[i][2]);
-        console.log(menurun_list[i]);
+        // console.log(menurun_list[i]);
         for (let j=0; j < tmpstr.length; j++) {
             if (tmpstr.substr(j,1).toUpperCase() != '*') {
                 document.getElementById('anw_' + (start_x +j) + '_' + (start_y)).innerHTML =  tmpstr.substr(j,1).toUpperCase();
             }else{
-                console.log('anw_' + (start_x +j) + '_' + (start_y));
+                // console.log('anw_' + (start_x +j) + '_' + (start_y));
                 if (document.getElementById('anw_' + (start_x +j) + '_' + (start_y)).innerHTML ==  "&nbsp;") {
                     document.getElementById('anw_' + (start_x +j) + '_' + (start_y)).innerHTML =  "&nbsp;";
                 }
@@ -626,8 +663,8 @@ function inpkey(e) {
             showquest('right');
             autosaved_tts();
             
-            nextbox.currentTime = 0;
-            nextbox.play();
+            btnclick.currentTime = 0;
+            btnclick.play();
             TweenLite.to(magnifybox, .1, {
                 scaleX: .7,
                 ease: Expo.easeOut
@@ -872,12 +909,35 @@ function d(id) {
     return document.getElementById(id);
 }
 
+function anschecker(){
+    let chcarr;
+    let totalq = jwb_hor.length + jwb_ver.length;
+    let totalcorrect = 0;
+    
+    //Check Horizontal
+    for(let i=0; i<jwb_ver.length; i++){
+        chcarr = md5(jwb_ver[i][2]);
+        if (jwb_ver[i][3] == chcarr) {
+            totalcorrect++;
+        }
+    }
+    //Check Vertical
+    for(let i=0; i<jwb_hor.length; i++){
+        chcarr = md5(jwb_hor[i][2]);
+        if (jwb_hor[i][3] == chcarr) {
+            totalcorrect++;
+        }
+    }
+    return Math.ceil((totalcorrect/ totalq) * 100);
+}
+
 function autosaved_tts(){
     var mydata = {
         uname_reg: uname_active,
         idgame: gameid_active,
         j_hor: JSON.stringify(jwb_hor),
         j_ver: JSON.stringify(jwb_ver),
+        prggame : anschecker(),
     };
 
     $.ajax({
@@ -903,7 +963,6 @@ function gosubmit() {
             uname_reg: uname_active,
             idgame: gameid_active,
         };
-        console.log(mydata);
 
         $.ajax({
             url: base_url + "index.php/adv/addnew_tts_user",

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="style.css?=z001">
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/TweenMax.min.js"></script>
+    <script src="js/md5.js"></script>
 </head>
 
 <body>
@@ -39,6 +40,18 @@
         <source src="fx/notification-positive-230572.mp3" type="audio/mpeg">
     </audio>
     
+    <audio id='btnclick'>
+        <source src="fx/buttonclick.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id='btncancel'>
+        <source src="fx/rotate.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id='nonpremium'>
+        <source src="fx/nonpremium.mp3" type="audio/mpeg">
+    </audio>
+    
     <div class="container">
        
        <div id="cover">
@@ -46,7 +59,7 @@
            <img src="images/kompkuning.png" id="logo_kom">
            <div id="midcov">
                 <img src="#" alt="" id="logogame">
-                <h1 id="brdtittle">Minggu ini</h1>
+                
                 <div id="infotts">
                     
                 </div>
@@ -64,6 +77,24 @@
                     <div id="conyes">Main</div>
                 </div>
             </div>
+            
+            <div id="nonprem">
+                <div id="modalnonprem">
+                    <h1 id="nonpremtittle">Yang berlalu<br>ngga harus<br>jadi Kenangan</h1>
+                    <div id="msgprem">
+                        Kamu hanya bisa memainkan Croz/Word yang terbaru<br>
+                        Untuk main semua Croz/Word<br>
+                        <b>Subscribe Kompas Plus</b><br>
+                        </div>
+                    <img src="images/sedihpeople.png" alt="" id="imgconfnonprem">
+                    <img src="images/close.png" alt="" id="btnpremclose">
+                    
+                    <div id="conyesnonprem">Subscribe Kompas+</div>
+
+                </div>
+            </div>
+
+
             <div id="reguser">
                 <p class="tittles">Masukkan Nama untuk menyimpan atau melanjutkan Permainan</p>
                 <input type="text" id="uname" placeholder="Enter Name to save the progress" maxlength="30" class="finput">
