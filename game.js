@@ -1,10 +1,10 @@
 // let base_url = 'http://localhost:8888/apisdecolgen/';
 
-// if (window.location.hostname == 'localhost') {
+if (window.location.hostname == 'localhost:8888') {
     base_url = 'http://localhost:8888/crozword_backend/';
-// }else{
-//     base_url = 'https://apis.ompaseries.xyz/';    
-// }
+}else{
+     base_url = 'https://croz.ompaseries.xyz/';    
+}
 
 let uname_active = 'dendy-001'
 let gameid_active = 1;
