@@ -1,6 +1,6 @@
 // let base_url = 'http://localhost:8888/apisdecolgen/';
 
-if (window.location.hostname == 'localhost:8888') {
+if (window.location.hostname == 'localhost') {
     base_url = 'http://localhost:8888/crozword_backend/';
 }else{
      base_url = 'https://croz.ompaseries.xyz/';    
@@ -9,7 +9,7 @@ if (window.location.hostname == 'localhost:8888') {
 let uname_active = 'dendy-001'
 let gameid_active = 1;
 let active_board_for_all = '';
-let premium_user = false;
+let premium_user = true;
 
 var boardcol = 0;
 var boardrow = 0;
@@ -90,20 +90,23 @@ function getboardinfo() {
 function boardinffill(r){
     let pastboard = false;
     let tempbrd = '';
+
     infotts.innerHTML = '<h1 id="brdtittle">Minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
-        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname'>Board " + r[i].idgame +  "</div><div class=brdinfo>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
+        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
         if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; active_board_for_all = r[i].idgame }
     }
     
     //boardpic.src = 'https://ompaseries.xyz/boardtts/' + arrboardgame[arrboardgame_curr] + ".png";
-    
     document.querySelectorAll('.cardboard').forEach(box => 
       box.addEventListener('click', () => {
         tempbrd = box.id;
-        gameid_active = tempbrd.substr(4, tempbrd.length);
 
+        gameid_active = tempbrd.substr(4, tempbrd.length);
+        
+        brdtittle.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + document.getElementById('cwinfo' + gameid_active).innerHTML+ "?</h1>"
+        
         if ((gameid_active != active_board_for_all) && (!premium_user)) {
             //console.log('user murahan');
             showsubscribepopup();

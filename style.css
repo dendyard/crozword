@@ -285,6 +285,7 @@ body {
     margin: auto;
     background-color: #fff;
     display: none;
+    z-index: 12;
 }
 
 #nonprem {
@@ -299,6 +300,7 @@ body {
     margin: auto;
     background-color: #fff;
     display: none;
+    z-index: 12;
 }
 
 #iconmain {
@@ -737,6 +739,8 @@ body {
 }
 
 
+
+
 @media screen and (min-width: 400px) {
 
     #gameplay {
@@ -835,4 +839,89 @@ body {
     #magnifybox {
         display: flex;
     }
+}
+
+@media only screen and (max-width: 400px) {
+    #midcov {
+        position: absolute;
+        width: 335px;
+        height: 485px;
+        left: 0;
+        right: 0;
+        top: 40px;
+        margin: auto;
+        opacity: 0;
+        font-family: "Kadwa", serif;
+    }
+
+    .brdinfo {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+        width: 163px;
+        margin-right: 10px;
+        line-height: 1;
+    }
+
+    #brdpast {
+        line-height: 1;
+        font-size: 16px;
+        font-weight: 200;
+        margin-top: 25px;
+        margin-bottom: 16px;
+    }
+
+    #modalconf {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 295px;
+        height: 410px;
+        top: 100px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        border: 3px #000 solid;
+        border-radius: 10px;
+        padding-left: 15px;
+        padding-top: 15px;
+        line-height: 1;
+        padding-right: 15px;
+    }
+
+    .confboxplay {
+        font-size: 20px !important;
+        line-height: 1.2 !important;
+        margin-block-start: 0px;
+    }
+
+    #conno {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 90px;
+        height: 30px;
+        right: 186px;
+        display: inline-block;
+        text-align: center;
+        padding-top: 13px;
+        border: 1px #000 solid;
+        top: 357px;
+    }
+
+    #conyes {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 115px;
+        height: 30px;
+        right: 48px;
+        display: inline-block;
+        color: #fff;
+        background-color: #000;
+        text-align: center;
+        padding-top: 13px;
+        border: 1px #000 solid;
+        top: 359px;
+    }
+
+
 }
