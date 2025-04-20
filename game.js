@@ -90,11 +90,12 @@ function getboardinfo() {
 function boardinffill(r){
     let pastboard = false;
     let tempbrd = '';
+    let cwinfotemp = '';
 
     infotts.innerHTML = '<h1 id="brdtittle">Minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
-        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
+        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname' id='cwname" + r[i].idgame +  "'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
         if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; active_board_for_all = r[i].idgame }
     }
     
@@ -104,9 +105,10 @@ function boardinffill(r){
         tempbrd = box.id;
 
         gameid_active = tempbrd.substr(4, tempbrd.length);
-        
-        brdtittle.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + document.getElementById('cwinfo' + gameid_active).innerHTML+ "?</h1>"
-        
+        cwinfotemp = document.getElementById('cwname' + gameid_active).innerHTML + ", " +document.getElementById('cwinfo' + gameid_active).innerHTML;
+        brdtittlepop.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + cwinfotemp + "?</h1>"
+        console.log(cwinfotemp)
+
         if ((gameid_active != active_board_for_all) && (!premium_user)) {
             //console.log('user murahan');
             showsubscribepopup();
