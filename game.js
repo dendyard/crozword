@@ -65,7 +65,22 @@ function getParameterByName(name, url = window.location.href) {
 //     gameid_active = qparamlevel;
 // }
 
-getboardinfo();
+gameinitstart();
+
+function gameinitstart(){
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (searchParams.has('uid')) {
+        uname_active = searchParams.get('uid');
+        getboardinfo();
+    }else{
+        //User not logged in
+        nologinuser.style.display = 'block';
+    }
+    
+
+    //getboardinfo();
+}
 function getboardinfo() {
     var mydata = {
         idgame: '',
