@@ -6,10 +6,10 @@ if (window.location.hostname == 'localhost') {
      base_url = 'https://croz.ompaseries.xyz/';    
 }
 
-let uname_active = 'dendy-001'
+let uname_active = 'dummy'
 let gameid_active = 1;
 let active_board_for_all = '';
-let premium_user = true;
+let premium_user = 0;
 
 var boardcol = 0;
 var boardrow = 0;
@@ -59,7 +59,6 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 // let qparamlevel = getParameterByName('v'); // "lorem"
-
 // if (qparamlevel != null) {
 //     //Check board load
 //     gameid_active = qparamlevel;
@@ -72,6 +71,8 @@ function gameinitstart(){
 
     if (searchParams.has('uid')) {
         uname_active = searchParams.get('uid');
+        premium_user = searchParams.get('sub');
+console.log(premium_user);
         getboardinfo();
     }else{
         //User not logged in
@@ -107,7 +108,7 @@ function boardinffill(r){
     let tempbrd = '';
     let cwinfotemp = '';
 
-    infotts.innerHTML = '<h1 id="brdtittle">Minggu ini</h1>';
+    infotts.innerHTML = '<h1 id="brdtittle">Croz/Word minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
         infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname' id='cwname" + r[i].idgame +  "'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
@@ -116,7 +117,7 @@ function boardinffill(r){
     
     //boardpic.src = 'https://ompaseries.xyz/boardtts/' + arrboardgame[arrboardgame_curr] + ".png";
     document.querySelectorAll('.cardboard').forEach(box => 
-      box.addEventListener('click', () => {
+      box.addEventListener('click', () => {brdtittle
         tempbrd = box.id;
 
         gameid_active = tempbrd.substr(4, tempbrd.length);
@@ -124,8 +125,8 @@ function boardinffill(r){
         brdtittlepop.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + cwinfotemp + "?</h1>"
         console.log(cwinfotemp)
 
-        if ((gameid_active != active_board_for_all) && (!premium_user)) {
-            //console.log('user murahan');
+        if ((gameid_active != active_board_for_all) && (premium_user != '1')) {
+            //console.log('user  free');
             showsubscribepopup();
             
         }else{
@@ -657,8 +658,8 @@ function inpkey(e) {
     let isfull = true;
     let currboxinquest;
 
-    pilih.currentTime = 0;
-    pilih.play();
+    // pilih.currentTime = 0;
+    // pilih.play();
     
     TweenMax.to(d(e.target.id), 0.1, {scale: 1.8, ease: Expo.easeOut});
     TweenMax.to(d(e.target.id), 0.1, {scale: 1, ease: Expo.easeOut, delay:0.1});
