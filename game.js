@@ -6,7 +6,7 @@ if (window.location.hostname == 'localhost') {
      base_url = 'https://croz.ompaseries.xyz/';    
 }
 
-let uname_active = 'dummy'
+let uname_active = '-'
 let gameid_active = 1;
 let active_board_for_all = '';
 let premium_user = 0;
