@@ -111,22 +111,29 @@ function boardinffill(r){
     infotts.innerHTML = '<h1 id="brdtittle">Croz/Word minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
-        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname' id='cwname" + r[i].idgame +  "'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
-        if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; active_board_for_all = r[i].idgame }
+        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname' id='cwname" + r[i].idgame +  "'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext id='prgtext" + r[i].idgame + "'>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
+        if (r.length > 1) {
+            if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; active_board_for_all = r[i].idgame }
+        }
     }
     
-    //boardpic.src = 'https://ompaseries.xyz/boardtts/' + arrboardgame[arrboardgame_curr] + ".png";
     document.querySelectorAll('.cardboard').forEach(box => 
       box.addEventListener('click', () => {brdtittle
+        let prginfo = "Ayo taklukkan Croz/Word ini!";
         tempbrd = box.id;
 
         gameid_active = tempbrd.substr(4, tempbrd.length);
+        
+        if (document.getElementById('prgtext' + gameid_active).innerHTML != "0%") {
+            prginfo = "Kamu menaklukkan " + document.getElementById('prgtext' + gameid_active).innerHTML + "<br>dari Croz/Word ini!"; 
+        }
+        
         cwinfotemp = document.getElementById('cwname' + gameid_active).innerHTML + ", " +document.getElementById('cwinfo' + gameid_active).innerHTML;
-        brdtittlepop.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + cwinfotemp + "?</h1>"
-        console.log(cwinfotemp)
-
+        brdtittlepop.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + cwinfotemp + "?</h1><div id='prgconf'>" + prginfo + "</div>"
+        
+        // console.log(cwinfotemp)
         if ((gameid_active != active_board_for_all) && (premium_user != '1')) {
-            //console.log('user  free');
+            //console.log('user free');
             showsubscribepopup();
             
         }else{

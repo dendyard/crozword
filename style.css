@@ -354,6 +354,7 @@ body {
     padding-top: 15px;
     line-height: 1;
     padding-right: 15px;
+    text-align: center;
 }
 
 #modalnonprem {
@@ -842,6 +843,10 @@ body {
     }
   }
 
+  #prgconf {
+    font-size: 14px;
+  }
+
 @media only screen and (min-height: 650px){
     #statusq {
         display: none;
@@ -902,7 +907,7 @@ body {
         position: absolute;
         font-family: "Kadwa", serif;
         width: 295px;
-        height: 410px;
+        height: 450px;
         top: 100px;
         left: 0;
         right: 0;
@@ -914,6 +919,7 @@ body {
         padding-top: 15px;
         line-height: 1;
         padding-right: 15px;
+        text-align: center;
     }
 
     .confboxplay {
@@ -932,7 +938,7 @@ body {
         text-align: center;
         padding-top: 13px;
         border: 1px #000 solid;
-        top: 359px;
+        top: 390px;
     }
 
     #conyes {
@@ -947,7 +953,7 @@ body {
         text-align: center;
         padding-top: 13px;
         border: 1px #000 solid;
-        top: 359px;
+        top: 390px;
     }
 
 
