@@ -107,11 +107,21 @@ function boardinffill(r){
     let pastboard = false;
     let tempbrd = '';
     let cwinfotemp = '';
+    let prgcolor;
 
     infotts.innerHTML = '<h1 id="brdtittle">Croz/Word minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
-        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname' id='cwname" + r[i].idgame +  "'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%'></div></div><div class=prgtext id='prgtext" + r[i].idgame + "'>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
+        
+        if (r[i].prggame == 0) {
+            prgcolor = "#D9D9D9";
+        }else if (r[i].prggame > 0 && r[i].prggame < 100) {
+            prgcolor = "#E55225";
+        }else if (r[i].prggame == 100) {
+            prgcolor = "#00F076";
+        }
+        
+        infotts.innerHTML += "<div class=cardboard id='card" + r[i].idgame +  "'><div class=brdpic><img src='board/" + r[i].idgame + ".png' id='boardpic'></div><div class='brdinfo'><div class='brdname' id='cwname" + r[i].idgame +  "'>Board " + r[i].idgame +  "</div><div class=brdinfo id='cwinfo" + r[i].idgame + "'>" + r[i].ttsinfo +  "</div><div class=brdprog><div class=prgbox><div class=prgval style='width:" + r[i].prggame +  "%; background-color:" + prgcolor + " !important;'></div></div><div class=prgtext id='prgtext" + r[i].idgame + "'>" + (r[i].prggame != null ? r[i].prggame : '0') + "%</div></div></div><div class=brdbutton><img src='images/brdarrow.svg' class=brdarr></div></div>";
         if (r.length > 1) {
             if (!pastboard) { infotts.innerHTML += "<h1 id='brdpast'>Croz/Word sebelumnya</h1>"; pastboard = true; active_board_for_all = r[i].idgame }
         }
