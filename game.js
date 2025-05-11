@@ -1085,6 +1085,8 @@ function anschecker(){
         chcarr = md5(jwb_ver[i][2]);
         if (jwb_ver[i][3] == chcarr) {
             totalcorrect++;
+        }else{
+            console.log('tidak sama Menurun: ' +  jwb_ver[i][0] + " - " + jwb_ver[i][3] + " - " + jwb_ver[i][2])
         }
     }
     //Check Vertical
@@ -1092,6 +1094,8 @@ function anschecker(){
         chcarr = md5(jwb_hor[i][2]);
         if (jwb_hor[i][3] == chcarr) {
             totalcorrect++;
+        }else{
+            console.log('tidak sama Mendatar: ' +  jwb_hor[i][0] + " - " + jwb_hor[i][3] + " - " + jwb_hor[i][2])
         }
     }
     return Math.ceil((totalcorrect/ totalq) * 100);
