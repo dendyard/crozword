@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Croz/Word Kompascom Apps</title>
+
+    <meta name="msapplication-TileColor" content="#FFF">
+    <meta name="theme-color" content="#FFF">
+
+    <style>
+        * {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.circular-progress {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(#4caf50 0%, #e0e0e0 0%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.circular-progress::before {
+  content: "";
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.progress-value {
+  position: relative;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="circular-progress">
+          <span class="progress-value">0%</span>
+        </div>
+    </div>
+   </body>
+
+   <script>
+
+const circularProgress = document.querySelector(".circular-progress");
+const progressValue = document.querySelector(".progress-value");
+
+let progressStartValue = 0;
+let progressEndValue = 10; // Ubah ini sesuai kebutuhan
+let speed = 20;
+
+let progress = setInterval(() => {
+  progressStartValue++;
+
+  progressValue.textContent = `${progressStartValue}%`;
+  circularProgress.style.background = `conic-gradient(
+    #4caf50 ${progressStartValue * 3.6}deg, 
+    #e0e0e0 ${progressStartValue * 3.6}deg
+  )`;
+
+  if (progressStartValue >= progressEndValue) {
+    clearInterval(progress);
+  }
+}, speed);
+
+
+   </script>
+</html>

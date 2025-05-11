@@ -9,7 +9,11 @@ body {
     background-color: #fff;
     overflow-x: hidden;
     font-family: 'Inter', sans-serif;
-    margin: 0;
+    
+    /* position: fixed; */
+    height: calc(100% - 0px);
+    width: 100vw;
+    margin: auto;
 }
 
 #bgheader {
@@ -26,6 +30,71 @@ body {
     width: 100%;
 }
 
+.circular-progress {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(#4caf50 0%, #e0e0e0 0%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .circular-progress::before {
+    content: "";
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  .circular-progress2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(#4caf50 0%, #e0e0e0 0%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .circular-progress2::before {
+    content: "";
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  
+  .progress-value {
+    position: relative;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .progress-value2 {
+    position: relative;
+    font-size: 45px;
+    font-weight: bold;
+    margin-left: 13px;
+  }
+
+  .prgplayonthefly2 {
+    width: 120px;
+    height: 120px;
+    font-size: 7px;
+    margin: auto;
+  }
+
+  .prgplayonthefly {
+    width: 28px;
+    height: 28px;
+    font-size: 7px;
+  }
+
 #bgin {
     position: absolute;
     /* left: 0; */
@@ -35,6 +104,9 @@ body {
     width: 145px;
 }
 
+.container {
+    margin: auto;
+}
 #cta {
     position: absolute;
     left: 0;
@@ -65,7 +137,7 @@ body {
 }
 
 .colsq2 {
-    width: 25px;
+    width: 24px;
     height: 30px;
     background-color: #fff;
     display: inline-block;
@@ -92,12 +164,13 @@ body {
 }
 
 #gameplay {
-    position: absolute;
+
     width: 360px;
-    top: 0;
+    top: 70px;
     left: 0;
     right: 0;
     margin: auto;
+    opacity: 0;
 }
 
 #kk {
@@ -167,22 +240,16 @@ body {
 #cover {
     width: 100%;
     background-color: #fff;
-    height: 100%;
     z-index: 100;
-    position: fixed;
-    /* background-image: url(images/patter.png);
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-size: 80%; */
 }
 
 #midcov {
-    position: absolute;
+    /* position: absolute; */
     width: 360px;
     height: 485px;
     left: 0;
     right: 0;
-    top: 100px;
+    /* top: 100px; */
     /* bottom: 0; */
     margin: auto;
     opacity: 0;
@@ -267,7 +334,7 @@ body {
     margin-bottom: 20px;
     padding-bottom: 10px;
     border: 3px #000 solid;
-    border-radius: 10px;
+    border-radius: 25px;
     padding-left: 15px;
     padding-top: 15px;
     line-height: 1;
@@ -286,6 +353,71 @@ body {
     background-color: #fff;
     display: none;
     z-index: 12;
+}
+
+#confiboxout {
+    position: fixed;
+    font-family: "Kadwa", serif;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #fff;
+    display: none;
+    z-index: 12;
+}
+
+#confiboxexit {
+    position: fixed;
+    font-family: "Kadwa", serif;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #fff;
+    /* display: none; */
+    z-index: 12;
+}
+
+#confiboxinfo {
+    position: fixed;
+    font-family: "Kadwa", serif;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #fff;
+    display: none;
+    z-index: 12;
+}
+
+.headcw {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    width: 90%;
+    margin: auto;
+    margin-top: 14px;
+    margin-bottom: 30px;
+}
+
+#loadinganim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70px;
+    bottom: 0;
+    margin: auto;
+    width: 100px;
 }
 
 #nonprem {
@@ -330,6 +462,15 @@ body {
 }
 
 
+#iconconfi {
+    position: absolute;
+    width: 125px;
+    top: -139px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 #iconmain {
     position: absolute;
     width: 295px;
@@ -349,12 +490,54 @@ body {
     bottom: 0;
     margin: auto;
     border: 3px #000 solid;
-    border-radius: 10px;
+    border-radius: 20px;
     padding-left: 15px;
     padding-top: 15px;
     line-height: 1;
     padding-right: 15px;
     text-align: center;
+}
+
+#modalconf3 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 295px;
+    height: 488px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px #000 solid;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-top: 15px;
+    line-height: 1;
+    padding-right: 15px;
+    text-align: center;
+    
+}
+#modalconf4 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 295px;
+    height: 517px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px #000 solid;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-top: 15px;
+    line-height: 1;
+    padding-right: 15px;
+    text-align: center;
+}
+
+#confiboxexit {
+    display: none;
 }
 
 #modalnonprem {
@@ -439,6 +622,32 @@ body {
     top: 466px;
 }
 
+#conno2 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 90px;
+    height: 30px;
+    right: 186px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 13px;
+    border: 1px #000 solid;
+    top: 466px;
+}
+
+#conno3 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 90px;
+    height: 30px;
+    right: 186px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 13px;
+    border: 1px #000 solid;
+    top: 466px;
+}
+
 #conyesnonprem {
     position: absolute;
     font-family: "Kadwa", serif;
@@ -454,6 +663,53 @@ body {
     top: 538px;
     left: 0;
     margin: auto;
+}
+
+#conyes2 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 115px;
+    height: 30px;
+    right: 48px;
+    display: inline-block;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    padding-top: 13px;
+    border: 1px #000 solid;
+    top: 466px;
+}
+
+#conyes3 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 115px;
+    height: 30px;
+    right: 48px;
+    display: inline-block;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    padding-top: 13px;
+    border: 1px #000 solid;
+    top: 466px;
+}
+
+#conyes4 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 115px;
+    height: 30px;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    padding-top: 13px;
+    border: 1px #000 solid;
+    top: 466px;
+    border-radius: 30px;
+    margin: auto;
+    left: 0;
+    right: 0;
 }
 
 #conyes {
@@ -489,14 +745,56 @@ body {
     margin: auto;
 }
 
+#headergame {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 30px;
+    /* background-color: #f8f8f8; */
+    position: relative;
+    margin-top: 10px;
+}
+
+#prpplayicon {
+    display:  none;
+}
 #logo_kom {
-    position: absolute;
     width: 130px;
-    left: 13px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+#backarro_play {
+    /* position: relative;
+    width: 26px;
+    left: 32px;
+    top: 33px;
+    z-index: 102;
+    display: flex; */
+}
+
+#modalconf2 {
+    position: absolute;
+    font-family: "Kadwa", serif;
+    width: 295px;
+    height: 290px;
+    top: 100px;
+    left: 0;
     right: 0;
-    top: 35px;
+    bottom: 0;
     margin: auto;
-    z-index: 10;
+    border: 3px #000 solid;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-top: 0px;
+    line-height: 1;
+    padding-right: 15px;
+    text-align: center;
+}
+.conh {
+line-height: 1.1;
 }
 
 #botcov {
@@ -566,15 +864,14 @@ body {
 
  /* Container for the board */
  .board {
-    grid-template-columns: repeat(var(--boxcol), var(--sizecol)); 
+    grid-template-columns: repeat(var(--boxcol), var(--sizecol));
     grid-template-rows: repeat(var(--boxrow), var(--sizerow));
     display: grid;
     width: fit-content;
-    margin: 15px auto;
+    margin: 7px auto 10px auto;
     box-sizing: border-box;
     border-left: solid 1px #222;
     border-top: solid 1px #222;
-
 }
 
 /* Each cell in the grid */
@@ -618,16 +915,22 @@ body {
     right: 0;
     justify-content: center;
     display: flex;
-    top: 3px;
+    top: 5px;
+    font-weight: 600;
 }
-
+#hrdy {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 #statusq {
-    position: absolute;
     left: 0;
     right: 0;
     bottom: 254px;
     width: 190px;
-    height: 40px;
+    height: 30px;
     margin: auto;
     max-width: 360px;
     text-align: center;
@@ -647,11 +950,7 @@ body {
 }
 
 #qdisp {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 176px;
-    width: 100%;
+    width: 95%;
     height: 47px;
     border-radius: 10px;
     border: 1px solid #eee;
@@ -659,10 +958,11 @@ body {
     margin: auto;
     max-width: 360px;
     display: flex;
+    margin-top: 10px;
 }
 
 #magnifybox {
-    position: absolute;
+    
     left: 0;
     right: 0;
     bottom: 234px;
@@ -766,19 +1066,29 @@ body {
     font-weight: bold;   
 }
 
+.ft-wght-300 {
+    font-weight: 300 !important; 
+}
 
+#welcomemsg {
+    line-height: 1.3;font-weight: 500;
+}
 
+h4 {
+    line-height: 1.3;
+}
 
 @media screen and (min-width: 400px) {
 
     #gameplay {
-        position: absolute;
-        top: 0;
+        /* position: absolute; */
+        top: 70px;
         left: 0;
         right: 0;
         margin: auto;
         width: 410px;
         max-width: 410px;
+        display: none;
     }
 
     /* Container for the board */
@@ -875,12 +1185,12 @@ body {
 
 @media only screen and (max-width: 400px) {
     #midcov {
-        position: absolute;
+        /* position: absolute; */
         width: 335px;
         height: 485px;
         left: 0;
         right: 0;
-        top: 40px;
+        /* top: 40px; */
         margin: auto;
         opacity: 0;
         font-family: "Kadwa", serif;
@@ -914,7 +1224,7 @@ body {
         bottom: 0;
         margin: auto;
         border: 3px #000 solid;
-        border-radius: 10px;
+        border-radius: 20px;
         padding-left: 15px;
         padding-top: 15px;
         line-height: 1;
@@ -926,6 +1236,7 @@ body {
         font-size: 20px !important;
         line-height: 1.2 !important;
         margin-block-start: 0px;
+        margin-bottom: 20px;
     }
 
     #conno {
@@ -938,7 +1249,8 @@ body {
         text-align: center;
         padding-top: 13px;
         border: 1px #000 solid;
-        top: 390px;
+        top: 400px;
+        border-radius: 30px;
     }
 
     #conyes {
@@ -953,7 +1265,68 @@ body {
         text-align: center;
         padding-top: 13px;
         border: 1px #000 solid;
-        top: 390px;
+        top: 400px;
+        border-radius: 30px;
+    }
+    
+    #conno2 {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 90px;
+        height: 30px;
+        right: 186px;
+        display: inline-block;
+        text-align: center;
+        padding-top: 13px;
+        border: 1px #000 solid;
+        top: 210px;
+        border-radius: 30px;
+    }
+
+    #conyes2 {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 115px;
+        height: 30px;
+        right: 48px;
+        display: inline-block;
+        color: #fff;
+        background-color: #000;
+        text-align: center;
+        padding-top: 13px;
+        border: 1px #000 solid;
+        top: 210px;
+        border-radius: 30px;
+    }
+    
+    #conno3 {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 90px;
+        height: 30px;
+        right: 186px;
+        display: inline-block;
+        text-align: center;
+        padding-top: 13px;
+        border: 1px #000 solid;
+        border-radius: 30px;
+        top: 420px;
+    }
+
+    #conyes3 {
+        position: absolute;
+        font-family: "Kadwa", serif;
+        width: 115px;
+        height: 30px;
+        right: 48px;
+        display: inline-block;
+        color: #fff;
+        background-color: #000;
+        text-align: center;
+        padding-top: 13px;
+        border: 1px #000 solid;
+        border-radius: 30px;
+        top: 420px;
     }
 
 

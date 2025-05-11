@@ -1,9 +1,9 @@
-// Version 0003
+// let base_url = 'http://localhost:8888/apisdecolgen/';
 
 if (window.location.hostname == 'localhost') {
     base_url = 'http://localhost:8888/crozword_backend/';
 }else{
-    base_url = 'https://croz.ompaseries.xyz/';  
+     base_url = 'https://croz.ompaseries.xyz/';    
 }
 
 let uname_active = '-'
@@ -13,7 +13,7 @@ let premium_user = 0;
 
 var boardcol = 0;
 var boardrow = 0;
-var boardboxsize = 26;
+var boardboxsize = 24;
 
 let board_set = [];
 let mendatar_list = [];
@@ -36,8 +36,6 @@ let cpos = 0;
 let submitrequest = false;
 let arrboardgame = [];
 let arrboardgame_curr = 0;
-let pagelocation = 0;
-let offautonext = false;
 
 let game_user_active = '0129-dendy';
 
@@ -60,6 +58,12 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+// let qparamlevel = getParameterByName('v'); // "lorem"
+// if (qparamlevel != null) {
+//     //Check board load
+//     gameid_active = qparamlevel;
+// }
+
 gameplay.style.display = 'none';
 statusq.style.display = 'none';
 boardnum.style.display = 'none';
@@ -74,12 +78,14 @@ function gameinitstart(){
 
     if (searchParams.has('uid')) {
         uname_active = searchParams.get('uid');
-        premium_user = searchParams.get('subs');
+        premium_user = searchParams.get('sub');
+        // console.log(premium_user);
         getboardinfo();
     }else{
         //User not logged in
         nologinuser.style.display = 'block';
     }
+    //getboardinfo();
 }
 function getboardinfo() {
     var mydata = {
@@ -103,22 +109,20 @@ function getboardinfo() {
 }
 
 function boardinffill(r){
-
     let pastboard = false;
     let tempbrd = '';
     let cwinfotemp = '';
     let prgcolor;
-    pagelocation = 0;
-    loadinganim.style.display = 'none';
+
     infotts.innerHTML = '<h1 id="brdtittle">Croz/Word minggu ini</h1>';
     for (let i=0; i<r.length; i++) {
         arrboardgame.push(r[i].idgame);
         
         if (r[i].prggame == 0) {
             prgcolor = "#D9D9D9";
-        }else if (r[i].prggame > 0 && r[i].prggame < 50) {
+        }else if (r[i].prggame > 0 && r[i].prggame < 100) {
             prgcolor = "#E55225";
-        }else if (r[i].prggame >= 50) {
+        }else if (r[i].prggame == 100) {
             prgcolor = "#00F076";
         }
         
@@ -142,8 +146,11 @@ function boardinffill(r){
         cwinfotemp = document.getElementById('cwname' + gameid_active).innerHTML + ", " +document.getElementById('cwinfo' + gameid_active).innerHTML;
         brdtittlepop.innerHTML = "<h1 id=brdtittle class=confboxplay><span id=brdconss>Mainkan <br></span>" + cwinfotemp + "?</h1><div id='prgconf'>" + prginfo + "</div>"
         
-        if ((gameid_active != active_board_for_all) && (premium_user != 'true')) {
+        // console.log(cwinfotemp)
+        if ((gameid_active != active_board_for_all) && (premium_user != '1')) {
+            //console.log('user free');
             showsubscribepopup();
+            
         }else{
             btnclick.currentTime = 0;
             btnclick.play();
@@ -167,14 +174,12 @@ function showsubscribepopup(){
 conyesnonprem.addEventListener('click', ()=>{
     TweenMax.to(modalnonprem, 0, {alpha: 0, scale:.7, y:10, ease: Expo.easeOut});
     nonprem.style.display = 'none';
-    
+
     window.open('https://plus.kompas.com/detail?source=crozword','blank');
 })
 
 btnpremclose.addEventListener('click', ()=>{
     TweenMax.to(modalnonprem, 0, {alpha: 0, scale:.7, y:10, ease: Expo.easeOut});
-    TweenMax.to(modalnonprem, 0, {alpha: 0, scale:.7, y:10, ease: Expo.easeOut});
-
     nonprem.style.display = 'none';
     btncancel.currentTime = 0;
     btncancel.play();
@@ -189,10 +194,8 @@ function openconfirmationbox(){
 }
 
 conyes.addEventListener('click',()=>{
-    loadinganim.style.display = 'block';
     reguser_todb();
     TweenMax.to(modalconf, .2, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut});
-    
 })
 conno.addEventListener('click', ()=>{
     confibox.style.display='none';
@@ -200,6 +203,9 @@ conno.addEventListener('click', ()=>{
     btncancel.currentTime = 0;
     btncancel.play();
 })
+
+// barr_right.addEventListener('click', navboardselect);
+// barr_left.addEventListener('click', navboardselect);
 
 function navboardselect(e) {
     if (e.target.id =='barr_right') {
@@ -216,122 +222,22 @@ function navboardselect(e) {
         if (arrboardgame_curr < 0) {
             arrboardgame_curr = (arrboardgame.length-1);
         }
+        //console.log(arrboardgame_curr);
     }
     gameid_active = arrboardgame[arrboardgame_curr];
+    //boardpic.src = 'https://ompaseries.xyz/boardtts/' + arrboardgame[arrboardgame_curr] + ".png";
     boardpic.src = 'board/' + arrboardgame[arrboardgame_curr] + ".png";
 }
-
-TweenMax.to(modalconf2, 0, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut});
-conno2.addEventListener('click',()=>{
-    TweenMax.to(modalconf2, .2, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut, onComplete:()=>{
-        confiboxout.style.display = 'none';
-        backarro_play.style.display = 'block';
-    }});
-});
-TweenMax.to(modalconf4,0, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut});
-conyes4.addEventListener('click',()=>{
-    
-    TweenMax.to(modalconf4, .2, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut, onComplete:()=>{
-        confiboxinfo.style.display = 'none';
-    }});
-});
-prpplayicon.addEventListener('click',()=>{
-    confiboxinfo.style.display = 'block';
-    TweenMax.to(modalconf4, .2, {alpha: 1, scale:1, y:0, ease: Expo.easeOut});
-    refprogresplay(1);
-});
-
-conno3.addEventListener('click',()=>{
-    TweenMax.to(modalconf3, .2, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut, onComplete:()=>{
-        confiboxexit.style.display = 'none';
-        backarro_play.style.display = 'block';
-    }});
-});
-
-conyes2.addEventListener('click',()=>{
-    //back to home
-    console.log('back');
-
-    TweenMax.to(modalconf2, .2, {alpha: 0, scale:.8, y:-10, ease: Expo.easeOut, onComplete:()=>{
-        submitrequest = false;
-        prpplayicon.style.display= 'none';
-        confiboxout.style.display = 'none';
-        backarro_play.style.display = 'block';
-        confibox.style.display = 'none';
-       
-        cover.style.display = 'block';
-        TweenMax.to(cover, 0.3, {alpha: 1, ease: Expo.easeOut});
-
-        gameplay.style.display = 'none';
-        gameplay.style.opacity = '1';
-
-        statusq.style.display = 'none';
-        boardnum.style.display = 'none';
-        
-        qdisp.style.display = 'none';
-        magnifybox.style.display = 'none';
-        
-        ckeyboard.style.display = 'none';
-        
-        loadinganim.style.display = 'none';
-        grid.innerHTML = '';
-        initboard();
-    }});
-});
-
-function initboard(){
-    board_set = [];
-    mendatar_list = [];
-    menurun_list = [];
-    jwb_hor = [];
-    jwb_ver = [];
-
-    onedgedelete = false;
-    board_map = [];
-
-    questpost = 0;
-    questorient = 'hor';
-    activebox = '';
-    active_quest = [];
-    active_jwb = [];
-
-    cursorbox = '';
-    activestiles = [];
-    cpos = 0;
-    submitrequest = false;
-    arrboardgame = [];
-    arrboardgame_curr = 0;
-    infotts.innerHTML = "";
-    pagelocation = 0;
-    getboardinfo();
-}
-
-backarro_play.addEventListener('click', ()=>{
-    btnclick.currentTime = 0;
-    btnclick.play();
-    if (pagelocation > 0) {
-        confiboxout.style.display = 'block';
-        TweenMax.to(modalconf2, .2, {alpha: 1, scale:1, y:0, ease: Expo.easeOut});
-        backarro_play.style.display = 'none';
-    }else{
-        confiboxexit.style.display = 'block';
-        TweenMax.to(modalconf3, .2, {alpha: 1, scale:1, y:0, ease: Expo.easeOut});
-        backarro_play.style.display = 'none';
-    }
-});
 
 function fillgameboard(r){
     let gamedata = r;
              
     board_set = JSON.parse(gamedata[0].boardset); 
     mendatar_list =JSON.parse(gamedata[0].hor_set); 
+    mendatar_list =JSON.parse(gamedata[0].hor_set); 
     menurun_list =JSON.parse(gamedata[0].ver_set); 
     jwb_hor =JSON.parse(gamedata[0].j_hor); 
     jwb_ver =JSON.parse(gamedata[0].j_ver); 
-    
-    boxinfoname.innerHTML = "Board " + r[0].idgame; 
-    boxinfodetail.innerHTML = r[0].ttsinfo; 
-    copyinfoplay.innerHTML = "Croz/Word ini mempunyai " + (mendatar_list.length + menurun_list.length) + " soal,<br>" + mendatar_list.length + " Mendatar dan " + menurun_list.length + " Menurun.<br>Ayo Taklukkan Semuanya!"
 
     let bs = gamedata[0].boardsize.split(',');
     boardcol = bs[0];
@@ -344,51 +250,47 @@ function fillgameboard(r){
 
     ingame.currentTime = 0;
     ingame.play();
-    pagelocation = 1;
+
     TweenMax.to(cover, 1, {alpha: 0, ease: Expo.easeOut, onComplete:()=>{
         cover.style.display = 'none';
         gameplay.style.display = 'block';
-        gameplay.style.opacity = '1';
-        statusq.style.display = 'block';
-        boardnum.style.display = 'inline-block';
-        qdisp.style.display = 'flex';
-        magnifybox.style.display = 'flex';
-        ckeyboard.style.display = 'block';
-        backarro_play.style.display = 'block';
-        loadinganim.style.display = 'none';
-        prpplayicon.style.display= 'flex';
-        refprogresplay();
+                statusq.style.display = 'block';
+                boardnum.style.display = 'inline-block';
+                qdisp.style.display = 'flex';
+                magnifybox.style.display = 'flex';
+                ckeyboard.style.display = 'block';
     }});
+
 }
+
 
 function newgame() {
-    var mydata = {
-        uname_reg: uname_active,
-        idgame: gameid_active,
-    };
+        var mydata = {
+            uname_reg: uname_active,
+            idgame: gameid_active,
+        };
 
-    console.log(mydata);
-    $.ajax({
-        url: base_url + "index.php/adv/addnew_tts_user",
-        type: "POST",
-        data: mydata,
-        dataType: "JSON",
-        success: function(response) {
-            fillgameboard(response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert('Gagal menyimpan, refresh browser')
-        }
-    });  
+        console.log(mydata);
+        $.ajax({
+            url: base_url + "index.php/adv/addnew_tts_user",
+            type: "POST",
+            data: mydata,
+            dataType: "JSON",
+            success: function(response) {
+                fillgameboard(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Gagal menyimpan, refresh browser')
+            }
+        });  
 }
 
+
 larr.addEventListener('click',()=>{
-    offautonext = false;
     showquest('left');
 })
 
 rarr.addEventListener('click',()=>{
-    offautonext = false;
     showquest('right');
 })
 
@@ -562,7 +464,7 @@ function cursorposition(boxclicked = ''){
             cursorbox = 'anw_' + strarr[1] + "_" + currpost;
         }else{
             let bxcl = boxclicked.split('_');
-            // console.log('box click : ' + 'tiles_' + bxcl[1] + "_" + bxcl[2]);
+            console.log('box click : ' + 'tiles_' + bxcl[1] + "_" + bxcl[2]);
             document.getElementById('tiles_' + bxcl[1] + "_" + bxcl[2]).style.backgroundColor = "#FFE240";
             document.getElementById('mag_' + bxcl[1] + "_" + bxcl[2]).style.backgroundColor = "#FFE240";
         }
@@ -574,6 +476,8 @@ function cursorposition(boxclicked = ''){
         
         temstr = activeansarr[getindexq][2];
         cfind = false;
+
+
         if (boxclicked == '') {
             for(let blankspot = 0; blankspot < activeansarr[getindexq][2].length-1; blankspot++){
                 if (!cfind){
@@ -589,12 +493,26 @@ function cursorposition(boxclicked = ''){
             cursorbox = 'anw_' + currpost + "_" + strarr[2];
         }else{
             let bxcl = boxclicked.split('_');
-            // console.log('box click : ' + 'tiles_' + bxcl[1] + "_" + bxcl[2]);
+            console.log('box click : ' + 'tiles_' + bxcl[1] + "_" + bxcl[2]);
             document.getElementById('tiles_' + bxcl[1] + "_" + bxcl[2]).style.backgroundColor = "#FFE240";
             document.getElementById('mag_' + bxcl[1] + "_" + bxcl[2]).style.backgroundColor = "#FFE240";
         }
         
         qcont.innerHTML = menurun_list[getindexq][1];
+        //--------------------------------------------
+        // for(let blankspot = 0; blankspot < activeansarr[getindexq][2].length-1; blankspot++){
+        //     if (!cfind){
+        //         if (temstr.substr(blankspot, 1) == "*") {
+        //             currpost = parseInt(strarr[1]) + blankspot;
+        //             cfind = true;
+        //         }
+        //     }
+        // }
+
+        // document.getElementById('tiles_' + currpost + "_" + strarr[2]).style.backgroundColor = "#FFE240";
+        // document.getElementById('mag_' + currpost + "_" + strarr[2]).style.backgroundColor = "#FFE240";
+        // qcont.innerHTML = menurun_list[getindexq][1];
+        // cursorbox = 'anw_' + currpost + "_" + strarr[2];
     }
 
     
@@ -647,6 +565,7 @@ function highlight_boxes(direction_q, positionq, resetbox = true, dontcallcursor
         }
         
     }else{
+        // console.log('you call ' + direction_q + ',' + positionq);
         start_x = menurun_list[positionq][2];
         start_y = menurun_list[positionq][3];
         active_quest.push(mendatar_list[positionq]);
@@ -685,15 +604,17 @@ function openmagnify(){
 }
 
 function magnifyclick(e){
-    offautonext = true;
     let boxtile = e.target.id;
     let strarr = boxtile.split('_');
 
     cursorbox = 'anw_' + strarr[1] + '_' + strarr[2];
-    // console.log('berfor : ' + cursorbox);
+    console.log('berfor : ' + cursorbox);
     highlight_boxes(questorient, findValue((questorient == 'hor' ? mendatar_list : menurun_list), findedrootbox), true, true);
     cursorposition(cursorbox);
     
+    // console.log('after  : ' + cursorbox);
+    // console.log("tiles_" + strarr[1] + "_" + strarr[2]);
+    // document.getElementById("tiles_" + strarr[1] + "_" + strarr[2]).style.backgroundColor = "#D9EAFD";
 }
 
 function clear_highlight_board() {
@@ -709,9 +630,12 @@ function updateboard(){
     //Check hor progress
     for (let i = 0; i <= jwb_hor.length-1; i++) {
         //Find box to fill user input
+        //console.log(mendatar_list);
         quest_index = findQuestionValue(mendatar_list, jwb_hor[i][0]);        
         start_x = mendatar_list[quest_index][2];
         start_y = mendatar_list[quest_index][3];
+        // console.log('X : ' + start_x);
+        // console.log('Y : ' + start_y);
         
         tmpstr = String(jwb_hor[i][2]);
         for (let j=0; j < tmpstr.length; j++) {
@@ -781,26 +705,25 @@ function inpkey(e) {
     
         active_jwb[0][2] = updateanw;
         update_cross_anw(cursorbox, e.target.id.toUpperCase());
+        if (isfull) {
+            
+            showquest('right');
+            autosaved_tts();
+            
+            btnclick.currentTime = 0;
+            btnclick.play();
+            TweenLite.to(magnifybox, .1, {
+                scaleX: .7,
+                ease: Expo.easeOut
+            });
+            
+            TweenLite.to(magnifybox, .3, {
+                scaleX: 1,
+                ease: Back.easeOut,
+                delay:.1
+            });
 
-        if (!offautonext) {
-            if (isfull) {
-                
-                showquest('right');
-                autosaved_tts();
-                
-                // btnclick.currentTime = 0;
-                // btnclick.play();
-                TweenLite.to(magnifybox, .1, {
-                    scaleX: .7,
-                    ease: Expo.easeOut
-                });
-                
-                TweenLite.to(magnifybox, .3, {
-                    scaleX: 1,
-                    ease: Back.easeOut,
-                    delay:.1
-                });
-            }
+            
         }
     }else{
         //Delete
@@ -878,10 +801,12 @@ function gen_jwb(){
     console.log(tamp);
 }
 
+// btnsave1.addEventListener('click', reguser_todb);
+// btncancel1.addEventListener('click', refreshgame);
+
 btnmulai.addEventListener('click', startnewgame);
 
 function reguser_todb(){
-    console.log('reuser')
     gosubmit();
 }
 
@@ -893,50 +818,6 @@ function startnewgame(e){
     //bouncinganimation(e.target);
     loading_game();
     analyticplay();
-}
-
-function refprogresplay(r=0){
-    let circularProgress;
-    let progressValue;
-
-    if (r==0){
-        circularProgress = document.querySelector(".circular-progress");
-        progressValue = document.querySelector(".progress-value");
-    }else{
-        circularProgress = document.querySelector(".circular-progress2");
-        progressValue = document.querySelector(".progress-value2");
-    }
-    
-    let progressStartValue = 0;
-    let progressEndValue = anschecker(); // Ubah ini sesuai kebutuhan
-    let speed = 10;
-    let colorbar = "#D9D9D9";
-
-    let progress = setInterval(() => {
-        if (progressEndValue > 0) {
-            progressStartValue++;
-          
-            if (progressStartValue > 0 && progressStartValue < 50) {
-              colorbar = "#E55225"; 
-            }else if (progressStartValue >= 50) {
-              colorbar = "#00F076";
-            }
-            if (r==0){
-                progressValue.innerHTML = progressStartValue;
-            }else{
-                progressValue.innerHTML = progressStartValue + '<small style="font-size: 14px;">%</small>';
-            }
-      
-            circularProgress.style.background = `conic-gradient(
-              ` + colorbar + ` ${progressStartValue * 3.6}deg, 
-              #A0A0A0 ${progressStartValue * 3.6}deg
-            )`;
-        }
-    
-      if (progressStartValue >= progressEndValue) {
-        clearInterval(progress);
-      }
-    }, speed);
 }
 
 function analyticplay() {
@@ -1039,9 +920,9 @@ function loading_game(){
     TweenMax.to(logogame, .3, {alpha: 0, y:-5, ease: Sine.easeOut,delay:0.1});
     TweenMax.to(infotts, .3, {alpha: 0, y:-5, ease: Sine.easeOut,delay:0.1});
     TweenMax.to(btnmulai, .3, {alpha: 0, y:-5, ease: Sine.easeOut,delay:0.3, onComplete:()=>{
-        // reguser.style.display = 'block';
-        // TweenMax.to(reguser, .3, {alpha: 1, y:0, ease: Sine.easeOut, delay:.5});
-        // document.getElementById("uname").focus();
+        reguser.style.display = 'block';
+        TweenMax.to(reguser, .3, {alpha: 1, y:0, ease: Sine.easeOut, delay:.5});
+        document.getElementById("uname").focus();
     }});
     // TweenMax.to(btncon, .3, {alpha: 0, y:-5, ease: Sine.easeOut,delay:0.3, onComplete:newgame});
 }
@@ -1054,7 +935,7 @@ function bouncinganimation(obj){
 TweenMax.to(logo_kom, 0, {alpha: 0, y:-8, ease: Sine.easeOut});
 TweenMax.to(logogame, 0, {alpha: 0, y:-8, ease: Sine.easeOut});
 TweenMax.to(infotts, 0, {alpha: 0, y:-8, ease: Sine.easeOut});
-// TweenMax.to(reguser, 0, {alpha: 0, y:-8, ease: Sine.easeOut});
+TweenMax.to(reguser, 0, {alpha: 0, y:-8, ease: Sine.easeOut});
 TweenMax.to(modalconf, 0, {alpha: 0, scale:.8, y:-8, ease: Sine.easeOut});
 
 TweenMax.to(btnmulai, 0, {scale: 0, ease: Sine.easeOut, onComplete:()=>{
@@ -1105,7 +986,6 @@ function autosaved_tts(){
         j_ver: JSON.stringify(jwb_ver),
         prggame : anschecker(),
     };
-    refprogresplay();
 
     $.ajax({
         url: base_url + "index.php/adv/update_tts_game",

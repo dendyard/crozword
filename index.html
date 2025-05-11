@@ -2,32 +2,42 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta charset="utf-8">
-    <title>Croz/Word Kompascom Apps</title>
+   <meta name="viewport" content="width=device-width">
+   <meta charset="utf-8">
+   <title>Croz/Word Kompas.com Apps</title>
 
-    <meta name="msapplication-TileColor" content="#FFF">
-    <meta name="theme-color" content="#FFF">
+   <meta name="msapplication-TileColor" content="#FFF">
+   <meta name="theme-color" content="#FFF">
 
    <!-- S:fb meta -->
    <meta property="og:type" content="Game" />
-   <meta property="og:image" content="https://ompaseries.xyz/crozword/cover.jpg?" />
-   <meta property="og:title" content="Croz/Word Kompas App" />
+   <meta property="og:image" content="https://play.kompas.com/kompas-games/crozwordfe/cover.jpg" />
+   <meta property="og:title" content="Croz/Word Kompas.com App" />
    <meta property="og:description" content="Asah otak sambil seru-seruan bareng Croz/Word, game teka-teki silang modern dengan tampilan trendy dan tantangan kekinian.">
-   <meta property="og:url" content="https://ompaseries.xyz/crozword" />
-   <meta property="og:site_name" content="https://ompaseries.xyz/crozword" />
+   <meta property="og:url" content="https://play.kompas.com/kompas-games/crozwordfe" />
+   <meta property="og:site_name" content="https://play.kompas.com/kompas-games/crozwordfe" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kadwa:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?=cw06">
+    <link rel="stylesheet" href="style.css?=cw21">
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/TweenMax.min.js"></script>
     <script src="js/md5.js"></script>
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PT7PC4');</script>
+    <!-- End Google Tag Manager -->    
 </head>
 
+
 <body>
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PT7PC4" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <audio id='pilih'>
         <source src="fx/click.mp3" type="audio/mpeg">
     </audio>
@@ -53,30 +63,34 @@
     </audio>
     
     <div class="container">
-       
+       <img src="images/loading_an.gif" id="loadinganim">
+       <div id="headergame">
+            <div><img src="images/backarrow.svg" id="backarro_play"></div>
+            <div><img src="images/kompaslogo_ori.svg" id="logo_kom"></div>
+            <div class="prgplayonthefly">
+                <div class="circular-progress" id="prpplayicon">
+                    <span class="progress-value">0</span>
+                </div>
+            </div>
+   </div>
        <div id="cover">
            
-           <img src="images/kompaslogo_ori.png" id="logo_kom">
            <div id="midcov">
-                <img src="#" alt="" id="logogame">
-                
+                <img src="#" alt="" id="logogame"> 
                 <div id="infotts"></div>
                 <div id="btnmulai">Mulai</div>
-            </div>    
-
+            </div>
             <div id="confibox">
                 <div id="modalconf">
                     <img src="images/iconmain.png" alt="" id="iconmain">
                     <h1 id="brdtittlepop" class="confboxplay">
-                        <span id="brdconss">Croz/Word <br></span>
-                    Croz/Word 04W125 - Edisi April 2025 No. 001?</h1>
+                        <span id="brdconss">Croz/Word <br></span></h1>
                     <img src="" alt="" id="imgconfbrd">
-                    
                     <div id="conno">Tidak</div>
                     <div id="conyes">Main</div>
                 </div>
             </div>
-
+            
             <div id="nologinuser">
                 <img src="images/loginerror.png" alt="" id="nolog">
             </div>
@@ -91,35 +105,71 @@
                         </div>
                     <img src="images/sedihpeople.png" alt="" id="imgconfnonprem">
                     <img src="images/close.png" alt="" id="btnpremclose">
-                    
                     <div id="conyesnonprem">Subscribe Kompas.com Plus</div>
-
                 </div>
             </div>
-
-
-            <div id="reguser">
-                <p class="tittles">Masukkan Nama untuk menyimpan atau melanjutkan Permainan</p>
-                <input type="text" id="uname" placeholder="Enter Name to save the progress" maxlength="30" class="finput">
-                <br>
-                <img src="images/btnsave.png" alt="" id="btnsave1">
-            </div>
-            <!-- <div id="coprt">Copyright 2008 - 2025 PT. Kompas Cyber Media (Kompas Gramedia Digital Group). All Rights Reserved.</div> -->
        </div>
 
        <div id="gameplay">
             <div id="grid" class="board"></div>
        </div>    
        <div id="statusq"><div id="boardnum">85</div> Mendatar</div>
-       <div id="qdisp">
-            <div id="larr"></div>
-            <div id="qcont"></div>
-            <div id="rarr"></div>
-       </div>
        <div id="magnifybox">
            <div id="mag_0_0" class="magtiles"></div>
-       </div>
+        </div>
+        <div id="qdisp">
+             <div id="larr"></div>
+             <div id="qcont"></div>
+             <div id="rarr"></div>
+        </div>
 
+       <div id="confiboxout">
+        <div id="modalconf2">
+            <img src="assets/konfirmasibox.png" alt="" id="iconconfi">
+            <img src="" alt="" id="imgconfbrd2">
+            <h1 class="conh">Tinggalkan Permainan?</h1>
+            <h4 class="ft-wght-300">Progres kamu sudah tersimpan,<br>kamu akan kembali ke halaman Utama Croz/Word</h4>
+            <div id="conno2">Tidak</div>
+            <!-- <a href="/"><div id="conyes2">Ya</div></a> -->
+            <div id="conyes2">Ya</div>
+        </div>
+     </div>
+       
+     <div id="confiboxexit">
+        <div id="modalconf3">
+            <img src="images/byebye.png" style="width: 100%;">
+            <h1 class="conh">Keluar dari Croz/Word?</h1>
+            <h4 class="ft-wght-300">Kamu akan kembali ke halaman Utama Kompas.com</h4>
+
+            <div id="conno3">Tidak</div>
+            <a href="/"><div id="conyes3">Ya</div></a>
+        </div>
+     </div>
+     
+     <div id="confiboxinfo">
+        <div id="modalconf4">
+            <div class="headcw">
+                <div>
+                    <img src="images/kompaslogo_ori.svg" style="width: 65px;"><br>
+                    <img src="images/crozword.svg" style="width: 150px; margin-bottom: 10px;"><br>
+                    <span id="boxinfoname"></span><br>
+                    <span style="font-size: 10px;" id="boxinfodetail">Edisi April Minggu ke 1.</span>
+                </div>
+                <img src="images/logocw.png" style="width: 100px">
+            </div>
+            <h1 class="conh">Jawaban benar kamu mencapai</h1>
+            <div>
+                <div class="prgplayonthefly2">
+                    <div class="circular-progress2">
+                        <span class="progress-value2">0<small style="font-size: 14px;">%</small></span>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="ft-wght-300" id="copyinfoplay">Croz/Word ini mempunyai 60 soal,<br>30 Mendatar dan 30 Menurun, Ayo Taklukkan Semuanya!</h4>            
+            <div id="conyes4">Tutup</div>
+        </div>
+     </div>
        <div id="ckeyboard"> 
             <div id="rwa" class="rowsq">
                 <div id="q" class="colsq2">Q</div>
@@ -156,7 +206,7 @@
             </div>
         </div>
     </div>
-    <!-- <div id="hrdy">code by Dhany Ar Vinci</div> -->
+    <!-- <div id="hrdy">code 1.0</div> -->
 </body>
-<script src="game.js?v=cw07"></script>
+<script src="game.js?v=cw020"></script>
 </html>
